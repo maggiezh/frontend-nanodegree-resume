@@ -104,6 +104,10 @@ a {
   display: none;
 }
 
+#skills-h4 {
+  color: #f5ae23;
+  display: none;
+}
 .orange {
   background-color: #f5ae23;
 }
@@ -146,6 +150,7 @@ a {
   flex-direction: column;
   flex-wrap: nowrap;
   padding: 10px;
+  color: red;
 }
 
 .center-content {
