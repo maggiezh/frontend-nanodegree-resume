@@ -53,7 +53,7 @@ var work = {
         {
             employer: "AT&T",
             title: "Developer",
-            location: "Richardson",
+            location: "Richardson, Texas",
             dateWorked: "04/2016 - current",
             description: [
                 "Working on developing Contract Rerate web tool. This web platform pulls data from different billing systems and mechanizes the contract rerate process for Telco LEC circuits. My role is a web developer to develop web pages, add new functionalities to enhance the application. MVC 5, Angular JS, JavaScript and Node are heavily used in the development; GIT is used for version control."
@@ -62,7 +62,7 @@ var work = {
         {
             employer: "AT&T",
             title: "SR SPECIALIST-APPLICATIONS DEVELOPER ",
-            location: "Richardson",
+            location: "Richardson, Texas",
             dateWorked: "07/2013 - 03/2016",
             description: [ 
                 "Designed and developed technical solution independently for Timely Feed of DTV Adjustments project, worked with application users to analyze business requirement, provided solutions and developed high level design, collaborated with business teams for testing;", 
@@ -94,7 +94,7 @@ var projects = {
         {
             title: "FIT Issue Tracker Reporting System",
             date: "2013",
-            description: "	Designed, developed and implemented a full-scale reporting solution for issue tracking system using MS SQL Server 2008 and MS SSRS 2008. This web tool is used for issue management including submitting issues, tracking ongoing issues and reporting capabilities for AT&T internal clients. My role is to assemble and convert user requirements from multiple business clients and application users into standard reports, create multi parameterized reports in MS SSRS 2008, allowing users the ability to make selections before executing reports to provide user friendly interface. Worked on the backend of the application in SQL Server 2008 to write queries, views and stored procedures. MS Report viewer is used to display reports from web. Generated release documents to facilitate production deployment; Used SVN for version control",
+            description: "Designed, developed and implemented a full-scale reporting solution for issue tracking system using MS SQL Server 2008 and MS SSRS 2008. This web tool is used for issue management including submitting issues, tracking ongoing issues and reporting capabilities for AT&T internal clients. My role is to assemble and convert user requirements from multiple business clients and application users into standard reports, create multi parameterized reports in MS SSRS 2008, allowing users the ability to make selections before executing reports to provide user friendly interface. Worked on the backend of the application in SQL Server 2008 to write queries, views and stored procedures. MS Report viewer is used to display reports from web. Generated release documents to facilitate production deployment; Used SVN for version control",
         }
     ]
 }
@@ -103,7 +103,7 @@ var education = {
     schools: [
         {
             name: "University of Texas at Dallas",
-            city: "Richardson",
+            location: "Richardson, Texas",
             degree: "M.S. in Information System",
             major: "Information System",
             dates: "2000"
@@ -113,7 +113,8 @@ var education = {
         {
             title: "",
             school: "",
-            dates: ""
+            dates: "",
+            url: ""
         }
     ]
 
@@ -133,11 +134,27 @@ if (work.jobs.length !== 0 ) {
     displayWork();
 }
 
-$("#main").append(internationalizeButton);
+// if (projects.projects.length > 0) {
+//     projects.display;
+// }
 
-//inName();
+// $("#main").append(internationalizeButton);
+projects.display = function () {
+    projects.projects.forEach(element => {
+        $("#projects").append(HTMLprojectStart);
+        var formattedProjectTitle = HTMLprojectTitle.replace("%data%", element.title);
+        $(".project-entry:last").append(formattedProjectTitle);
+        var formattedProjectDate = HTMLprojectDates.replace("%data%", element.date);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", element.description);
+        $(".project-entry:last").append(formattedDescription);
+    });
+}
 
-//console.log(locationizer(work));
+if (projects.projects.length > 0) {
+    projects.display();
+}
+
+$("#mapDiv").append(googleMap);
 
 function inName(name) {
     name = name.trim().split(" ");
