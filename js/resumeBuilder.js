@@ -2,8 +2,8 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 // $("#main").append("Maggie Zhou");
-var name1 = "Maggie Zhou";
-var role = "Web Developer";
+// var name1 = "Maggie Zhou";
+// var role = "Web Developer";
 
 var bio = {
     name: "Maggie Zhou",
@@ -45,7 +45,9 @@ var bio = {
         Version_Control: [
             "CodeCloud-Git", "Ankh-SVN"
         ]
-    }
+    },
+    biopic: "C:/git/frontend-nanodegree-resume/images/bioPic.jpg",
+    displaySkills: function (){}
 }
 
 var work = {
@@ -106,18 +108,36 @@ var education = {
             location: "Richardson, Texas",
             degree: "M.S. in Information System",
             major: "Information System",
-            dates: "2000"
+            dates: "12/2000"
         }
     ],
     onlineCourses: [
         {
-            title: "",
-            school: "",
-            dates: "",
-            url: ""
+            title: "Fron-End Web Developer Nanodegree Program",
+            school: "Udacity",
+            dates: "06/2017 - current",
+            url: "https://classroom.udacity.com/nanodegrees/nd001/syllabus/core-curriculum"
+        },
+        {
+            title: "TypeScript Fundamentals",
+            school: "Pluralsight",
+            dates: "01/2018",
+            url: "https://app.pluralsight.com/library/courses/typescript/table-of-contents"
+        },
+        {
+            title: "Designing and Building Component-based AngularJS Applications",
+            school: "Pluralsight",
+            dates: "12/2017",
+            url: "https://app.pluralsight.com/library/courses/component-based-angularjs-applications/table-of-contents"
+        },
+        {
+            title: "AngularJS Forms Using Bootstrap and MVC 5",
+            school: "Pluralsight",
+            dates: "03/2017",
+            url: "https://app.pluralsight.com/library/courses/angularjs-forms-bootstrap-mvc5/table-of-contents"
         }
-    ]
-
+    ],
+    displayEducation: function (){}
 }
 
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -125,20 +145,69 @@ $("#header").prepend(formattedRole);
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 $("#header").prepend(formattedName);
 
+var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+$("#header").append(formattedMobile);
+$("#lets-connect").append(formattedMobile);
+var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+$("#header").append(formattedEmail);
+$("#lets-connect").append(formattedEmail);
+var formattedGit = HTMLgithub.replace("%data%", bio.contacts.github);
+$("#header").append(formattedGit);
+$("#lets-connect").append(formattedGit);
+var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+$("#header").append(formattedLocation);
+$("#lets-connect").append(formattedLocation);
+var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
+$("#header").append(formattedPic);
+
 
 if(bio.skills != null) {
-    displaySkills ();
+    displaySkills();
 }
 
 if (work.jobs.length !== 0 ) {
     displayWork();
 }
 
-// if (projects.projects.length > 0) {
-//     projects.display;
-// }
+if(education != null) {
+    displayEducation();
+}
 
-// $("#main").append(internationalizeButton);
+
+function displayEducation () {
+    if (education.schools.length > 0) {
+        $("#education").append(HTMLschoolStart) ;
+        education.schools.forEach(e => {
+            var formattedSchoolName = HTMLschoolName.replace("%data%", e.name);
+            var formattedDegree = HTMLschoolDegree.replace("%data%", e.degree);
+            var formattedDates = HTMLschoolDates.replace("%data%", e.dates);
+            var formattedLocation = HTMLschoolLocation.replace("%data%", e.location);
+            var formattedMajor = HTMLschoolMajor.replace("%data%", e.major);
+            $(".education-entry:last").append(formattedSchoolName);
+            $(".education-entry:last").append(formattedDates);
+            $(".education-entry:last").append(formattedMajor);
+            $(".education-entry:last").append(formattedDegree);
+            $(".education-entry:last").append(formattedLocation);
+            
+        });
+    }
+
+    if (education.onlineCourses.length > 0) {
+        $("#education").append(HTMLonlineClasses);
+        $("#education").append(HTMLschoolStart) ;
+        education.onlineCourses.forEach(e => {
+            var formattedTitle =  HTMLonlineTitle.replace("%data%", e.title);
+            var formattedSchool = formattedTitle + HTMLonlineSchool.replace("%data%", e.school);
+            var formattedDates = HTMLonlineDates.replace("%data%", e.dates);
+            var formattedURL = HTMLonlineURL.replace("%data%", e.url); 
+           // $(".education-entry:last").append(formattedTitle);
+            $(".education-entry:last").append(formattedSchool);
+            $(".education-entry:last").append(formattedDates);
+            $(".education-entry:last").append(formattedURL);
+        });
+    }
+}
+
 projects.display = function () {
     projects.projects.forEach(element => {
         $("#projects").append(HTMLprojectStart);
